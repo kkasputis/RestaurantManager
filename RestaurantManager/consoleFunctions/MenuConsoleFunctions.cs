@@ -79,11 +79,16 @@ namespace RestaurantManager.consoleFunctions
                     Console.WriteLine("Invalid ID's. Try again.");
                     line = Console.ReadLine();
                 }
-                menu.Products = Console.ReadLine();
+                menu.Products = line;
             }
             if (menuService.Edit(menu))
             {
                 Console.WriteLine("Menu item edited successfully.");
+                EndFunction();
+            }
+            else
+            {
+                Console.WriteLine("Failed to edit menu item..");
                 EndFunction();
             }
         }
