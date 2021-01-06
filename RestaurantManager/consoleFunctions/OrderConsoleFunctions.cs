@@ -9,37 +9,37 @@ namespace RestaurantManager.consoleFunctions
 {
     class OrderConsoleFunctions : MiscConsolFunctins
     {
-        OrderService orderService = new OrderService();
+        readonly OrderService orderService = new OrderService();
 
 
-        public void showAllOrders()
+        public void ShowAllOrders()
         {
-            List<OrderItem> orderList = orderService.getAll();
+            List<OrderItem> orderList = orderService.GetAll();
             var table = new ConsoleTable("Id", "Date and time", "Menu items");
             foreach (OrderItem order in orderList)
             {
-                table.AddRow(order.Id, order.dateTime, order.menuItems);
+                table.AddRow(order.Id, order.DateTime, order.MenuItems);
             }
             Console.WriteLine(table);
         }
-        public void addOrder()
+        public void AddOrder()
         {
             OrderItem order = new OrderItem();
             Console.WriteLine("Enter menu item Id's. To separate Id's with spaces.");
             string line = Console.ReadLine();
-            while (!checkIfiDsValid(line))
+            while (!CheckIfiDsValid(line))
             {
                 Console.WriteLine("Invalid ID's. Try again.");
                 line = Console.ReadLine();
             }
-            order.menuItems = line;
-            order.dateTime = DateTime.Now;
-            Console.WriteLine(orderService.create(order));
-            endFunction();
+            order.MenuItems = line;
+            order.DateTime = DateTime.Now;
+            Console.WriteLine(orderService.Create(order));
+            EndFunction();
         }
-        public void removeOrder()
+        public void RemoveOrder()
         {
-            showAllOrders();
+            ShowAllOrders();
             Console.WriteLine("Enter ID of order to remove.");
             string line = Console.ReadLine();
             long id;
@@ -56,15 +56,15 @@ namespace RestaurantManager.consoleFunctions
                 }
                 id = Convert.ToInt64(line);
             }
-            if (orderService.remove(id))
+            if (orderService.Remove(id))
             {
                 Console.WriteLine("Order removed sucessfully.");
-                endFunction();
+                EndFunction();
             }
             else
             {
                 Console.WriteLine("Could not remove order...");
-                endFunction();
+                EndFunction();
             }
         }
     }

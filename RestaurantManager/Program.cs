@@ -10,17 +10,17 @@ namespace RestaurantManager
         {
             Console.WriteLine("Welcome to Restaurant Manger!");
             App app = new App();
-            app.appMenu();
+            app.AppMenu();
 
         }
 
     }
     class App
     {
-        MenuConsoleFunctions menuConsoleFunctions = new MenuConsoleFunctions();
-        StockConsoleFunctions stockFunctions = new StockConsoleFunctions();
-        OrderConsoleFunctions orderFunctions = new OrderConsoleFunctions();
-        public void appMenu()
+        readonly MenuConsoleFunctions menuConsoleFunctions = new MenuConsoleFunctions();
+        readonly StockConsoleFunctions stockFunctions = new StockConsoleFunctions();
+        readonly OrderConsoleFunctions orderFunctions = new OrderConsoleFunctions();
+        public void AppMenu()
         {
             Console.WriteLine("Choose an option from the following list:");
             Console.WriteLine("Stock:");
@@ -49,60 +49,60 @@ namespace RestaurantManager
                     case "1":
                         goodChoise = true;
                         Console.WriteLine("All stock items:");
-                        stockFunctions.showAllStock();
-                        endFunction();
+                        stockFunctions.ShowAllStock();
+                        EndFunction();
                         break;
                     case "2":
                         goodChoise = true;
                         Console.WriteLine("Add new stock item");
-                        stockFunctions.addStockItem();
+                        stockFunctions.AddStockItem();
                         break;
                     case "3":
                         goodChoise = true;
                         Console.WriteLine("Edit stock item");
-                        stockFunctions.editStockItem();
+                        stockFunctions.EditStockItem();
                         break;
                     case "4":
                         goodChoise = true;
                         Console.WriteLine("Remove stock item");
-                        stockFunctions.removeStockItem();
+                        stockFunctions.RemoveStockItem();
                         break;
                     case "5":
                         goodChoise = true;
                         Console.WriteLine("All menu items");
-                        menuConsoleFunctions.showAllMenu();
-                        endFunction();
+                        menuConsoleFunctions.ShowAllMenu();
+                        EndFunction();
                         break;
                     case "6":
                         goodChoise = true;
                         Console.WriteLine("Add new menu item");
-                        menuConsoleFunctions.addMenuItem();
+                        menuConsoleFunctions.AddMenuItem();
                         break;
                     case "7":
                         goodChoise = true;
                         Console.WriteLine("Edit menu item");
-                        menuConsoleFunctions.editMenuItem();
+                        menuConsoleFunctions.EditMenuItem();
                         break;
                     case "8":
                         goodChoise = true;
                         Console.WriteLine("Remove menu item");
-                        menuConsoleFunctions.removeMenuItem();
+                        menuConsoleFunctions.RemoveMenuItem();
                         break;
                     case "9":
                         goodChoise = true;
                         Console.WriteLine("Show all orders");
-                        orderFunctions.showAllOrders();
-                        endFunction();
+                        orderFunctions.ShowAllOrders();
+                        EndFunction();
                         break;
                     case "10":
                         goodChoise = true;
                         Console.WriteLine("Add new order");
-                        orderFunctions.addOrder();
+                        orderFunctions.AddOrder();
                         break;
                     case "11":
                         goodChoise = true;
                         Console.WriteLine("Remove order");
-                        orderFunctions.removeOrder();
+                        orderFunctions.RemoveOrder();
                         break;
                     case "exit":
                         return;
@@ -114,16 +114,16 @@ namespace RestaurantManager
         }
 
 
-        public void endFunction()
+        public void EndFunction()
         {
             Console.WriteLine("Press any key to continue....");
             Console.ReadKey();
-            appMenu();
+            AppMenu();
         }
     }
     class MiscConsolFunctins
     {
-        public bool checkIfiDsValid(string line)
+        public bool CheckIfiDsValid(string line)
         {
             bool response = true;
             long number;
@@ -135,17 +135,17 @@ namespace RestaurantManager
             return response;
         }
 
-        public void endFunction()
+        public void EndFunction()
         {
             Console.WriteLine("Press any key to continue....");
             Console.ReadKey();
             App app = new App();
-            app.appMenu();
+            app.AppMenu();
         }
         public void appMenu()
         {
             App app = new App();
-            app.appMenu();
+            app.AppMenu();
         }
     }
 }

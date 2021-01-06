@@ -10,11 +10,11 @@ namespace RestaurantManager.consoleFunctions
 {
     class StockConsoleFunctions : MiscConsolFunctins
     {
-        StockService stockService = new StockService();
+        readonly StockService stockService = new StockService();
    
-        public void showAllStock()
+        public void ShowAllStock()
         {
-            List<Stock> stockList = stockService.getAll();
+            List<Stock> stockList = stockService.GetAll();
             var table = new ConsoleTable("Id", "Name", "Portion Count", "Unit", "Portion Size");
             foreach (Stock stock in stockList)
             {
@@ -23,7 +23,7 @@ namespace RestaurantManager.consoleFunctions
             Console.WriteLine(table);
         }
 
-        public void addStockItem()
+        public void AddStockItem()
         {
             Stock stock = new Stock();
             Console.WriteLine("Enter stock name");
@@ -62,13 +62,13 @@ namespace RestaurantManager.consoleFunctions
                 }
                 stock.PortionSize = Convert.ToDecimal(line);
             }
-            Console.WriteLine(stockService.create(stock));
-            endFunction();
+            Console.WriteLine(stockService.Create(stock));
+            EndFunction();
         }
 
-        public void removeStockItem()
+        public void RemoveStockItem()
         {
-            showAllStock();
+            ShowAllStock();
             Console.WriteLine("Enter ID of stock item to remove.");
             string line = Console.ReadLine();
             long id;
@@ -85,22 +85,22 @@ namespace RestaurantManager.consoleFunctions
                 }
                 id = Convert.ToInt64(line);
             }
-            if (stockService.remove(id))
+            if (stockService.Remove(id))
             {
                 Console.WriteLine("Stock removed sucessfully.");
-                endFunction();
+                EndFunction();
             }
             else
             {
                 Console.WriteLine("Could not remove stock...");
-                endFunction();
+                EndFunction();
             }
         }
 
-        public void editStockItem()
+        public void EditStockItem()
         {
-            showAllStock();
-            List<Stock> stockList = stockService.getAll();
+            ShowAllStock();
+            List<Stock> stockList = stockService.GetAll();
             Console.WriteLine("Enter stock ID you want to edit");
             string line = Console.ReadLine();
             Stock stock = null;
@@ -172,10 +172,10 @@ namespace RestaurantManager.consoleFunctions
                     stock.PortionSize = Convert.ToDecimal(line);
                 }
             }
-            if (stockService.edit(stock))
+            if (stockService.Edit(stock))
             {
                 Console.WriteLine("Stock edited sucessfully.");
-                endFunction();
+                EndFunction();
             }
             else
             {

@@ -9,19 +9,19 @@ namespace RestaurantManager.service
     class OrderService : ICrud<OrderItem>
 
     {
-        public CsvService csvService = new CsvService();
-        public List<OrderItem> getAll()
+        readonly CsvService csvService = new CsvService();
+        public List<OrderItem> GetAll()
         {
-            return csvService.readOrderFile();
+            return csvService.ReadOrderFile();
         }
 
-        public string create(OrderItem order)
+        public string Create(OrderItem order)
         {
-            string stockResponse = checkStock(order.menuItems);
+            string stockResponse = CheckStock(order.MenuItems);
             if (stockResponse.Equals("true"))
             {
                 List<OrderItem> orderItems;
-                orderItems = csvService.readOrderFile();
+                orderItems = csvService.ReadOrderFile();
                 int id = orderItems.Count + 1;
 
                 while (orderItems.Any(x => x.Id == id))
@@ -29,7 +29,7 @@ namespace RestaurantManager.service
                     id++;
                 }
                 order.Id = id;
-                if (csvService.writeNewOrder(order))
+                if (csvService.WriteNewOrder(order))
                 {
                     return "New order created successfully.";
                 }
@@ -41,19 +41,19 @@ namespace RestaurantManager.service
             }
         }
 
-        public bool remove(long id)
+        public bool Remove(long id)
         {
-            return csvService.removeOrder(id);
+            return csvService.RemoveOrder(id);
         }
-        public bool edit(OrderItem item)
+        public bool Edit(OrderItem item)
         {
             throw new NotImplementedException();
         }
-        public string checkStock(String ingredients)
+        public string CheckStock(String ingredients)
         {
             string[] menuIds = ingredients.Split(" ");
-            List<Stock> stockList = csvService.readStockFile();
-            List<MenuItem> menuList = csvService.readMenuFile();
+            List<Stock> stockList = csvService.ReadStockFile();
+            List<MenuItem> menuList = csvService.ReadMenuFile();
             foreach (string menuId in menuIds)
             {
                 MenuItem menu = menuList.FirstOrDefault(x => x.Id == Convert.ToInt64(menuId));
@@ -87,7 +87,7 @@ namespace RestaurantManager.service
                 }
 
             }
-            csvService.editStock(stockList);
+            csvService.EditStock(stockList);
             return "true";
         }
 

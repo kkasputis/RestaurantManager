@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace RestaurantManager.entity
@@ -9,7 +8,7 @@ namespace RestaurantManager.entity
 
 
         public long Id { get; set; }
-        public DateTime dateTime { get; set; }
-        public String menuItems { get; set; }
+        public DateTime DateTime { get; set; }
+        public String MenuItems { get; set; }
     }
 }

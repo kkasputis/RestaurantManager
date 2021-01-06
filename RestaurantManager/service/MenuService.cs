@@ -7,36 +7,36 @@ namespace RestaurantManager.service
     class MenuService : ICrud<MenuItem>
 
     {
-        CsvService csvService = new CsvService();
-        public string create(MenuItem item)
+        readonly CsvService csvService = new CsvService();
+        public string Create(MenuItem item)
         {
             List<MenuItem> menuItems;
             string response;
-            menuItems = csvService.readMenuFile();
+            menuItems = csvService.ReadMenuFile();
             int id = menuItems.Count + 1;
             while (menuItems.Any(x => x.Id == id))
             {
                 id++;
             }
             item.Id = id;
-            if (csvService.writeNewMenu(item)) { response = "Menu item created successfully."; }
+            if (csvService.WriteNewMenu(item)) { response = "Menu item created successfully."; }
             else { response = "Faild to create new item."; }
             return response;
         }
 
-        public bool edit(MenuItem item)
+        public bool Edit(MenuItem item)
         {
-            return csvService.editMenuItem(item);
+            return csvService.EditMenuItem(item);
         }
 
-        public List<MenuItem> getAll()
+        public List<MenuItem> GetAll()
         {
-            return csvService.readMenuFile();
+            return csvService.ReadMenuFile();
         }
 
-        public bool remove(long id)
+        public bool Remove(long id)
         {
-            return csvService.removeMenuItem(id);
+            return csvService.RemoveMenuItem(id);
         }
     }
 }

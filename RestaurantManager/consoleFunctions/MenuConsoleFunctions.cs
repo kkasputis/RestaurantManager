@@ -10,10 +10,10 @@ namespace RestaurantManager.consoleFunctions
 {
     class MenuConsoleFunctions : MiscConsolFunctins
     {
-        MenuService menuService = new MenuService();
-        public void showAllMenu()
+        readonly MenuService menuService = new MenuService();
+        public void ShowAllMenu()
         {
-            List<MenuItem> menuList = menuService.getAll();
+            List<MenuItem> menuList = menuService.GetAll();
             var table = new ConsoleTable("Id", "Name", "Products");
             foreach (MenuItem menu in menuList)
             {
@@ -22,27 +22,27 @@ namespace RestaurantManager.consoleFunctions
             Console.WriteLine(table);
         }
 
-        public void addMenuItem()
+        public void AddMenuItem()
         {
             MenuItem menu = new MenuItem();
             Console.WriteLine("Enter menu item name");
             menu.Name = Console.ReadLine();
             Console.WriteLine("Enter menu item products Id's. Seperate Id's by spaces.");
             string line = Console.ReadLine();
-            while (!checkIfiDsValid(line))
+            while (!CheckIfiDsValid(line))
             {
                 Console.WriteLine("Invalid ID's. Try again.");
                 line = Console.ReadLine();
             }
             menu.Products = line;
-            Console.WriteLine(menuService.create(menu));
-            endFunction();
+            Console.WriteLine(menuService.Create(menu));
+            EndFunction();
         }
 
-        public void editMenuItem()
+        public void EditMenuItem()
         {
-            showAllMenu();
-            List<MenuItem> menuList = menuService.getAll();
+            ShowAllMenu();
+            List<MenuItem> menuList = menuService.GetAll();
             Console.WriteLine("Enter menu ID you want to edit");
             string line = Console.ReadLine();
             MenuItem menu = null;
@@ -74,22 +74,22 @@ namespace RestaurantManager.consoleFunctions
             line = Console.ReadLine();
             if (!line.Equals(""))
             {
-                while (!checkIfiDsValid(line))
+                while (!CheckIfiDsValid(line))
                 {
                     Console.WriteLine("Invalid ID's. Try again.");
                     line = Console.ReadLine();
                 }
                 menu.Products = Console.ReadLine();
             }
-            if (menuService.edit(menu))
+            if (menuService.Edit(menu))
             {
                 Console.WriteLine("Menu item edited successfully.");
-                endFunction();
+                EndFunction();
             }
         }
-        public void removeMenuItem()
+        public void RemoveMenuItem()
         {
-            showAllMenu();
+            ShowAllMenu();
             Console.WriteLine("Enter ID of menu item to remove.");
             string line = Console.ReadLine();
             long id;
@@ -106,15 +106,15 @@ namespace RestaurantManager.consoleFunctions
                 }
                 id = Convert.ToInt64(line);
             }
-            if (menuService.remove(id))
+            if (menuService.Remove(id))
             {
                 Console.WriteLine("Menu item removed sucessfully.");
-                endFunction();
+                EndFunction();
             }
             else
             {
                 Console.WriteLine("Could not remove menu item...");
-                endFunction();
+                EndFunction();
             }
         }
     }

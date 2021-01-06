@@ -10,26 +10,26 @@ namespace RestaurantManagerTests
     [TestClass]
     public class RestaurantManagerTests
     {
-        MockItems mockItems = new MockItems();
-        StockService stockService = new StockService();
-        OrderService orderService = new OrderService();
-        MenuService menuService = new MenuService();
+        readonly MockItems mockItems = new MockItems();
+        readonly StockService stockService = new StockService();
+        readonly OrderService orderService = new OrderService();
+        readonly MenuService menuService = new MenuService();
         [TestMethod]
         public void TestStock()
         {
             File.Delete(@"stock.csv");
-            Stock stock = mockItems.stockItem1();
-            string result = stockService.create(stock);
+            Stock stock = mockItems.StockItem1();
+            string result = stockService.Create(stock);
             Assert.AreEqual("New stock item created successfully.", result);
             stock.PortionCount = 5;
             Assert.AreEqual(1, stock.Id);
-            bool boolResult = stockService.edit(stock);
+            bool boolResult = stockService.Edit(stock);
             Assert.AreEqual(true, boolResult);
-            List<Stock> stockList = stockService.getAll();
+            List<Stock> stockList = stockService.GetAll();
             Assert.AreEqual(1, stockList.Count);
             Assert.AreEqual(5, stockList[0].PortionCount);
-            stockService.remove(stockList[0].Id);
-            stockList = stockService.getAll();
+            stockService.Remove(stockList[0].Id);
+            stockList = stockService.GetAll();
             Assert.AreEqual(0, stockList.Count);
          
             
@@ -39,18 +39,18 @@ namespace RestaurantManagerTests
         public void TestMenuItem()
         {
             File.Delete(@"menu.csv");
-            MenuItem menu = mockItems.menuItem();
-            string result = menuService.create(menu);
+            MenuItem menu = mockItems.MenuItem();
+            string result = menuService.Create(menu);
             Assert.AreEqual("Menu item created successfully.", result);
             menu.Products = "1 2";
             Assert.AreEqual(1, menu.Id);
-            bool boolResult = menuService.edit(menu);
+            bool boolResult = menuService.Edit(menu);
             Assert.AreEqual(true, boolResult);
-            List<MenuItem> menuList = menuService.getAll();
+            List<MenuItem> menuList = menuService.GetAll();
             Assert.AreEqual(1, menuList.Count);
             Assert.AreEqual("1 2", menuList[0].Products);
-            menuService.remove(menuList[0].Id);
-            menuList = menuService.getAll();
+            menuService.Remove(menuList[0].Id);
+            menuList = menuService.GetAll();
             Assert.AreEqual(0, menuList.Count);
        
 
@@ -61,35 +61,35 @@ namespace RestaurantManagerTests
             File.Delete(@"order.csv");
             File.Delete(@"menu.csv");
             File.Delete(@"stock.csv");
-            Stock stock = mockItems.stockItem1();
-            stockService.create(stock);
-            stock = mockItems.stockItem2();
-            stockService.create(stock);
-            MenuItem menu = mockItems.menuItem();
-            menuService.create(menu);
+            Stock stock = mockItems.StockItem1();
+            stockService.Create(stock);
+            stock = mockItems.StockItem2();
+            stockService.Create(stock);
+            MenuItem menu = mockItems.MenuItem();
+            menuService.Create(menu);
             menu.Products = "1 2";
-            OrderItem order = mockItems.orderItem();
-            string result = orderService.create(order);
+            OrderItem order = mockItems.OrderItem();
+            string result = orderService.Create(order);
             Assert.AreEqual("New order created successfully.", result);
-            order.menuItems = "1 2";
-            result = orderService.create(order);
+            order.MenuItems = "1 2";
+            result = orderService.Create(order);
             Assert.AreEqual("Could not find menu item with id 2", result);
             menu.Products = "1 2";
-            menuService.create(menu);
-            result = orderService.create(order);
+            menuService.Create(menu);
+            result = orderService.Create(order);
             Assert.AreEqual("Not not enought of Potato for Apple juice in this order", result);
-            List<OrderItem> orderList = orderService.getAll();
+            List<OrderItem> orderList = orderService.GetAll();
             Assert.AreEqual(1, orderList.Count);
-            bool boolResult = orderService.remove(orderList[0].Id);
+            bool boolResult = orderService.Remove(orderList[0].Id);
             Assert.AreEqual(true, boolResult);
-            orderList = orderService.getAll();
+            orderList = orderService.GetAll();
             Assert.AreEqual(0, orderList.Count);
 
 
         }
     }
     class MockItems {
-        public Stock stockItem1()
+        public Stock StockItem1()
         {
             Stock stock = new Stock();
             stock.Name = "Apple";
@@ -98,7 +98,7 @@ namespace RestaurantManagerTests
             stock.PortionSize = 1;
             return stock;
         }
-        public Stock stockItem2()
+        public Stock StockItem2()
         {
             Stock stock = new Stock();
             stock.Name = "Potato";
@@ -107,7 +107,7 @@ namespace RestaurantManagerTests
             stock.PortionSize = 2;
             return stock;
         }
-        public MenuItem menuItem()
+        public MenuItem MenuItem()
         {
             MenuItem menu = new MenuItem();
             menu.Name = "Apple juice";
@@ -115,11 +115,11 @@ namespace RestaurantManagerTests
             return menu;
         }
 
-        public OrderItem orderItem()
+        public OrderItem OrderItem()
         {
             OrderItem order = new OrderItem();
-            order.dateTime = DateTime.Now;
-            order.menuItems = "1";
+            order.DateTime = DateTime.Now;
+            order.MenuItems = "1";
             return order;
         }
         }

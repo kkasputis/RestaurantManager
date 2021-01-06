@@ -10,25 +10,25 @@ namespace RestaurantManager.service
 {
     class CsvService
     {
-        private readonly string orderDir = "orders.csv";
-        private readonly string stockDir = "stock.csv";
-        private readonly string menuDir = "menu.csv";
+        private readonly string OrderDir = "orders.csv";
+        private readonly string StockDir = "stock.csv";
+        private readonly string MenuDir = "menu.csv";
 
 
-        public List<OrderItem> readOrderFile()
+        public List<OrderItem> ReadOrderFile()
         {
             try
             {
-                if (File.Exists(@orderDir))
+                if (File.Exists(OrderDir))
                 {
-                    List<OrderItem> orders = File.ReadAllLines(@orderDir)
-                                              .Select(v => OrderValues.parseToObject(v))
+                    List<OrderItem> orders = File.ReadAllLines(OrderDir)
+                                              .Select(v => OrderValues.ParseToObject(v))
                                               .ToList();
                     return orders;
                 }
                 else
                 {
-                    emptyFile(@orderDir);
+                    EmptyFile(OrderDir);
                     return new List<OrderItem>();
                 }
             }
@@ -39,17 +39,17 @@ namespace RestaurantManager.service
             }
         }
 
-        public bool writeNewOrder(OrderItem order)
+        public bool WriteNewOrder(OrderItem order)
         {
-            if (!File.Exists(@orderDir))
+            if (!File.Exists(OrderDir))
             {
-                emptyFile(@orderDir);
+                EmptyFile(OrderDir);
             }
             try
             {
 
-                File.AppendAllText(@orderDir, orderObjectToString(order) + Environment.NewLine);
-                Console.WriteLine(@orderDir);
+                File.AppendAllText(OrderDir, orderObjectToString(order) + Environment.NewLine);
+                Console.WriteLine(OrderDir);
                 return true;
             }
             catch
@@ -58,16 +58,16 @@ namespace RestaurantManager.service
             }
         }
 
-        public bool removeOrder(long id)
+        public bool RemoveOrder(long id)
         {
             try
             {
-                List<OrderItem> orderItems = readOrderFile().Where(x => x.Id != id).ToList();
-                emptyFile(@orderDir);
+                List<OrderItem> orderItems = ReadOrderFile().Where(x => x.Id != id).ToList();
+                EmptyFile(OrderDir);
                 foreach (OrderItem orderItem in orderItems)
                 {
 
-                    File.AppendAllText(@orderDir, orderObjectToString(orderItem) + Environment.NewLine);
+                    File.AppendAllText(OrderDir, orderObjectToString(orderItem) + Environment.NewLine);
                 }
                 return true;
             }
@@ -76,32 +76,32 @@ namespace RestaurantManager.service
 
 
 
-        public List<MenuItem> readMenuFile()
+        public List<MenuItem> ReadMenuFile()
         {
-            if (File.Exists(@menuDir))
+            if (File.Exists(MenuDir))
             {
-                List<MenuItem> menuItems = File.ReadAllLines(@menuDir)
-                                          .Select(v => MenuValues.parseToObject(v))
+                List<MenuItem> menuItems = File.ReadAllLines(MenuDir)
+                                          .Select(v => MenuValues.ParseToObject(v))
                                           .ToList();
                 return menuItems;
             }
             else
             {
-                emptyFile(@menuDir);
+                EmptyFile(MenuDir);
                 return new List<MenuItem>();
             }
         }
 
-        public bool writeNewMenu(MenuItem menu)
+        public bool WriteNewMenu(MenuItem menu)
         {
-            if (!File.Exists(@menuDir))
+            if (!File.Exists(MenuDir))
             {
-                emptyFile(@menuDir);
+                EmptyFile(MenuDir);
             }
             try
             {
-                File.AppendAllText(@menuDir, menuObjectToString(menu) + Environment.NewLine);
-                Console.WriteLine(@menuDir);
+                File.AppendAllText(MenuDir, menuObjectToString(menu) + Environment.NewLine);
+                Console.WriteLine(MenuDir);
                 return true;
             }
             catch
@@ -110,12 +110,12 @@ namespace RestaurantManager.service
             }
         }
 
-        public bool editMenuItem(MenuItem menu)
+        public bool EditMenuItem(MenuItem menu)
 
         {
             try
             {
-                List<MenuItem> menuItems = readMenuFile();
+                List<MenuItem> menuItems = ReadMenuFile();
                 MenuItem originalMenu = menuItems.First(x => x.Id == menu.Id);
                 int index = menuItems.IndexOf(originalMenu);
                 Console.WriteLine(index);
@@ -126,25 +126,25 @@ namespace RestaurantManager.service
                 }
                 menuItems[index] = menu;
 
-                emptyFile(@menuDir);
+                EmptyFile(MenuDir);
                 foreach (MenuItem menuItem in menuItems)
                 {
-                    File.AppendAllText(@menuDir, menuObjectToString(menuItem) + Environment.NewLine);
+                    File.AppendAllText(MenuDir, menuObjectToString(menuItem) + Environment.NewLine);
                 }
                 return true;
             }
             catch { return false; }
         }
 
-        public bool removeMenuItem(long id)
+        public bool RemoveMenuItem(long id)
         {
             try
             {
-                List<MenuItem> menuItems = readMenuFile().Where(x => x.Id != id).ToList();
-                emptyFile(@menuDir);
+                List<MenuItem> menuItems = ReadMenuFile().Where(x => x.Id != id).ToList();
+                EmptyFile(MenuDir);
                 foreach (MenuItem menuItem in menuItems)
                 {
-                    File.AppendAllText(@menuDir, menuObjectToString(menuItem) + Environment.NewLine);
+                    File.AppendAllText(MenuDir, menuObjectToString(menuItem) + Environment.NewLine);
                 }
                 return true;
             }
@@ -152,31 +152,31 @@ namespace RestaurantManager.service
         }
 
 
-        public List<Stock> readStockFile()
+        public List<Stock> ReadStockFile()
         {
-            if (File.Exists(@stockDir))
+            if (File.Exists(StockDir))
             {
-                List<Stock> stockItems = File.ReadAllLines(@stockDir)
-                                          .Select(v => StockValues.parseToObject(v))
+                List<Stock> stockItems = File.ReadAllLines(StockDir)
+                                          .Select(v => StockValues.ParseToObject(v))
                                           .ToList();
                 return stockItems;
             }
 
             else
             {
-                emptyFile(@stockDir);
+                EmptyFile(StockDir);
                 return new List<Stock>();
             }
         }
-        public bool writeNewStock(Stock stock)
+        public bool WriteNewStock(Stock stock)
         {
-            if (!File.Exists(@stockDir))
+            if (!File.Exists(StockDir))
             {
-                emptyFile(@stockDir);
+                EmptyFile(StockDir);
             }
             try
             {
-                File.AppendAllText(@stockDir, stockObjectToString(stock) + Environment.NewLine);
+                File.AppendAllText(StockDir, StockObjectToString(stock) + Environment.NewLine);
                 return true;
             }
             catch
@@ -184,25 +184,25 @@ namespace RestaurantManager.service
                 return false;
             }
         }
-        public bool removeStock(long id)
+        public bool RemoveStock(long id)
         {
             try
             {
-                List<Stock> stockItems = readStockFile().Where(x => x.Id != id).ToList();
-                emptyFile(@stockDir);
+                List<Stock> stockItems = ReadStockFile().Where(x => x.Id != id).ToList();
+                EmptyFile(StockDir);
                 foreach (Stock stockItem in stockItems)
                 {
-                    File.AppendAllText(@stockDir, stockObjectToString(stockItem) + Environment.NewLine);
+                    File.AppendAllText(StockDir, StockObjectToString(stockItem) + Environment.NewLine);
                 }
                 return true;
             }
             catch { return false; }
         }
-        public bool editStock(Stock stock)
+        public bool EditStock(Stock stock)
         {
             try
             {
-                List<Stock> stockItems = readStockFile();
+                List<Stock> stockItems = ReadStockFile();
                 Stock originalStock = stockItems.First(x => x.Id == stock.Id);
                 int index = stockItems.IndexOf(originalStock);
                 if (index < 0)
@@ -213,10 +213,10 @@ namespace RestaurantManager.service
                 }
                 stockItems[index] = stock;
 
-                emptyFile(@stockDir);
+                EmptyFile(StockDir);
                 foreach (Stock stockItem in stockItems)
                 {
-                    File.AppendAllText(@stockDir, stockObjectToString(stockItem) + Environment.NewLine);
+                    File.AppendAllText(StockDir, StockObjectToString(stockItem) + Environment.NewLine);
                 }
                 return true;
             }
@@ -224,30 +224,30 @@ namespace RestaurantManager.service
 
         }
 
-        public void editStock(List<Stock> stock)
+        public void EditStock(List<Stock> stock)
         {
-            emptyFile(@stockDir);
+            EmptyFile(StockDir);
             foreach (Stock stockItem in stock)
             {
-                File.AppendAllText(@stockDir, stockObjectToString(stockItem) + Environment.NewLine);
+                File.AppendAllText(StockDir, StockObjectToString(stockItem) + Environment.NewLine);
             }
         }
 
 
-        public string stockObjectToString(Stock stock)
+        public string StockObjectToString(Stock stock)
         {
             return stock.Id + "," + stock.Name + "," + stock.PortionCount + "," + stock.Unit + "," + stock.PortionSize;
         }
         public string orderObjectToString(OrderItem order)
         {
-            return order.Id + "," + order.dateTime + "," + order.menuItems;
+            return order.Id + "," + order.DateTime + "," + order.MenuItems;
         }
         public string menuObjectToString(MenuItem menu)
         {
             return menu.Id + "," + menu.Name + "," + menu.Products;
         }
 
-        public void emptyFile(String dir)
+        public void EmptyFile(String dir)
         {
             StreamWriter strm = File.CreateText(@dir);
             strm.Flush();
@@ -255,13 +255,13 @@ namespace RestaurantManager.service
         }
         class OrderValues
         {
-            public static OrderItem parseToObject(string csvLine)
+            public static OrderItem ParseToObject(string csvLine)
             {
                 string[] values = csvLine.Split(',');
                 entity.OrderItem order = new entity.OrderItem();
                 order.Id = Convert.ToInt64(values[0]);
-                order.dateTime = Convert.ToDateTime(values[1]);
-                order.menuItems = Convert.ToString(values[2]);
+                order.DateTime = Convert.ToDateTime(values[1]);
+                order.MenuItems = Convert.ToString(values[2]);
 
                 return order;
             }
@@ -272,7 +272,7 @@ namespace RestaurantManager.service
 
 
 
-            public static Stock parseToObject(string csvLine)
+            public static Stock ParseToObject(string csvLine)
             {
                 string[] values = csvLine.Split(',');
                 Stock stock = new Stock();
@@ -290,7 +290,7 @@ namespace RestaurantManager.service
         {
 
 
-            public static MenuItem parseToObject(string csvLine)
+            public static MenuItem ParseToObject(string csvLine)
             {
                 string[] values = csvLine.Split(',');
                 MenuItem menu = new MenuItem();

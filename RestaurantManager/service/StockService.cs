@@ -7,36 +7,36 @@ namespace RestaurantManager.service
 {
     class StockService : ICrud<Stock>
     {
-        CsvService csvService = new CsvService();
-        public List<Stock> getAll()
+        readonly CsvService csvService = new CsvService();
+        public List<Stock> GetAll()
         {
-            return csvService.readStockFile();
+            return csvService.ReadStockFile();
         }
 
-        public string create(Stock stock)
+        public string Create(Stock stock)
         {
             List<Stock> stockItems;
             string response;
-            stockItems = csvService.readStockFile();
+            stockItems = csvService.ReadStockFile();
             int id = stockItems.Count + 1;
             while (stockItems.Any(x => x.Id == id))
             {
                 id++;
             }
             stock.Id = id;
-            if (csvService.writeNewStock(stock)) { response = "New stock item created successfully."; }
+            if (csvService.WriteNewStock(stock)) { response = "New stock item created successfully."; }
             else { response = "Failded to create new stock item."; }
             return response;
         }
 
-        public bool remove(long id)
+        public bool Remove(long id)
         {
-            return csvService.removeStock(id);
+            return csvService.RemoveStock(id);
         }
 
-        public bool edit(Stock item)
+        public bool Edit(Stock item)
         {
-            return csvService.editStock(item);
+            return csvService.EditStock(item);
         }
     }
 }

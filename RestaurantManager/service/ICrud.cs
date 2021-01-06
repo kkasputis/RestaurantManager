@@ -6,11 +6,11 @@ namespace RestaurantManager.entity
 {
     interface ICrud<T>
     {
-        public List<T> getAll();
-        public string create(T item);
-        public Boolean remove(long id);
+        public List<T> GetAll();
+        public string Create(T item);
+        public Boolean Remove(long id);
  
-        public Boolean edit(T item);
+        public Boolean Edit(T item);
 
     }
 }
