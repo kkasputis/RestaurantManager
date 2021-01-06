@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RestaurantManager.consoleFunctions
 {
-    class MenuConsoleFunctions : MiscConsolFunctins
+    class MenuConsoleFunctions : MiscConsoleFunctions
     {
         readonly MenuService menuService = new MenuService();
         public void ShowAllMenu()

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RestaurantManager.consoleFunctions
 {
-    class StockConsoleFunctions : MiscConsolFunctins
+    class StockConsoleFunctions : MiscConsoleFunctions
     {
         readonly StockService stockService = new StockService();
    

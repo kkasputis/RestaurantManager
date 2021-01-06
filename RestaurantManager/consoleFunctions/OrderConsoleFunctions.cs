@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RestaurantManager.consoleFunctions
 {
-    class OrderConsoleFunctions : MiscConsolFunctins
+    class OrderConsoleFunctions : MiscConsoleFunctions
     {
         readonly OrderService orderService = new OrderService();
 

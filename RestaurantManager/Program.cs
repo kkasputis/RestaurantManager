@@ -121,7 +121,7 @@ namespace RestaurantManager
             AppMenu();
         }
     }
-    class MiscConsolFunctins
+    class MiscConsoleFunctions
     {
         public bool CheckIfiDsValid(string line)
         {
