@@ -40,67 +40,67 @@ namespace RestaurantManager
             Console.WriteLine("");
             Console.WriteLine("\texit - Close program");
             Console.Write("Your option? ");
-            bool goodChoise = false;
+            bool goodChoice = false;
 
-            while (!goodChoise)
+            while (!goodChoice)
             {
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("All stock items:");
                         stockFunctions.ShowAllStock();
                         EndFunction();
                         break;
                     case "2":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Add new stock item");
                         stockFunctions.AddStockItem();
                         break;
                     case "3":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Edit stock item");
                         stockFunctions.EditStockItem();
                         break;
                     case "4":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Remove stock item");
                         stockFunctions.RemoveStockItem();
                         break;
                     case "5":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("All menu items");
                         menuConsoleFunctions.ShowAllMenu();
                         EndFunction();
                         break;
                     case "6":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Add new menu item");
                         menuConsoleFunctions.AddMenuItem();
                         break;
                     case "7":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Edit menu item");
                         menuConsoleFunctions.EditMenuItem();
                         break;
                     case "8":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Remove menu item");
                         menuConsoleFunctions.RemoveMenuItem();
                         break;
                     case "9":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Show all orders");
                         orderFunctions.ShowAllOrders();
                         EndFunction();
                         break;
                     case "10":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Add new order");
                         orderFunctions.AddOrder();
                         break;
                     case "11":
-                        goodChoise = true;
+                        goodChoice = true;
                         Console.WriteLine("Remove order");
                         orderFunctions.RemoveOrder();
                         break;
